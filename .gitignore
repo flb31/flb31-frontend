@@ -1,0 +1,17 @@
+#misc
+/.sass-cache
+npm-debug.log
+.DS_Store
+
+
+#dependences
+/node_modules
+/src/assets/bower_components
+/src/assets/js
+/src/assets/css
+/src/assets/tpl
+/src/index.html
+
+
+#build
+/dist
