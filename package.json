@@ -5,7 +5,7 @@
   "repository": "https://github.com/flb31/flb31-frontend",
   "scripts": {
     "prestart": "npm install",
-    "postinstall": "bower install && grunt build $NODE_ENV"
+    "postinstall": "bower install && grunt build $ENV"
   },
   "author": "Fabian Luna",
   "license": "MIT",
