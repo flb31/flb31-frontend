@@ -33,9 +33,15 @@
 
 ###Getting Started
 > 
-  `npm start`: Install package and run server.  
-  `grunt run`: Run Server.  
-  `grunt build`: Export project to **dist/**.  
+  `ENV=--dev npm install`: Install packages.  
+  `grunt server --dev`: Run server.  
+  `grunt run --dev`: Compile and Run Server.  
+  `grunt build --dev`: Export project to **dist/**.  
+
+###Production Enviroment
+> 
+  `grunt build`: Export project.  
+  `node server.js`: Run server  
 
 ###Heroku CLI
 Install Heroku CLI: https://devcenter.heroku.com/articles/heroku-command
