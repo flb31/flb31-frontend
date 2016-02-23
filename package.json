@@ -1,6 +1,6 @@
 {
   "name": "flb31-frontend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Base Project for FrontEnd development",
   "repository": "https://github.com/flb31/flb31-frontend",
   "scripts": {
