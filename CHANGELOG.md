@@ -1,3 +1,9 @@
+##0.1.2 (April, 21 2016)
+Features:
+- Added environment: Use `--env=dev` for active the mode development environment.  
+- Added port: Use `--port=dev` for active the mode development environment.  
+- Relocated assets in public path.
+
 ##0.1.1 (February, 23 2016)
 Features:
 - Added environment: Use `--dev` for active the mode development environment.  

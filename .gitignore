@@ -6,11 +6,11 @@ npm-debug.log
 
 #dependences
 /node_modules
-/src/assets/bower_components
-/src/assets/js
-/src/assets/css
-/src/assets/tpl
-/src/index.html
+/public/assets/bower_components
+/public/assets/js
+/public/assets/css
+/public/assets/tpl
+/public/*.html
 
 
 #build

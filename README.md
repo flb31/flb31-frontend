@@ -7,11 +7,12 @@
 
 
 ###Structure:
-- src/
+- public
   - assets/
     - img/
     - vendors/ 
     - bower_components/
+- src/
   - js/
   - sass/
   - tpl/
@@ -33,10 +34,15 @@
 
 ###Getting Started
 > 
-  `ENV=--dev npm install`: Install packages.  
-  `grunt server --dev`: Run server.  
-  `grunt run --dev`: Compile and Run Server.  
-  `grunt build --dev`: Export project to **dist/**.  
+  `ENV=dev npm install`: Install packages.  
+  `grunt server --env=dev`: Run server.  
+  `grunt run --env=dev`: Compile and Run Server.  
+  `grunt build --env=dev`: Export project to **dist/** without minify css and js.
+
+###Change Port
+The default port is 3103. --port=8000 for using the port 8000, for example.
+> 
+  `grunt server --env=dev --port=PORT-NUMBER`
 
 ###Production Enviroment
 > 

@@ -1,19 +1,32 @@
 module.exports = function(grunt){
 
-  var isDev = grunt.option('dev');
-  var env = (isDev) ? 'dev' : 'dist';
+  var envParam = grunt.option('env');
+  var port = grunt.option('port');
+  
+  var env = (envParam === 'dev') ? 'dev' : 'dist';
+  var PUBLIC_HTML = 'public';
+  var DIST = 'dist';
+  var PORT = port || 3103;
+  var URL =  'http://localhost:'+PORT;
+  var OPEN = true;
   
   var JADE_FILE_CFG = [ 
-                        { 'src/index.html': ['src/index.jade']},
+                        { 
+                          cwd: 'src/',
+                          src: '*.jade',
+                          dest: PUBLIC_HTML,
+                          expand: true,
+                          ext: '.html'
+                        },
                         {
                           cwd: 'src/tpl',
                           src: '**/*.jade',
-                          dest: 'src/assets/tpl',
+                          dest: PUBLIC_HTML + '/assets/tpl',
                           expand: true,
                           ext: '.html'
                         } 
                       ];
-  var UGLIFY_FILE_CFG = { 'src/assets/js/app.js': ['src/js/**/*.js'] };
+  var UGLIFY_FILE_CFG = { 'public/assets/js/app.js': ['src/js/**/*.js'] };
   
   grunt.initConfig({
     watch: {
@@ -30,17 +43,17 @@ module.exports = function(grunt){
         tasks: ['jshint','uglify:dev']
       },
       files: {
-        files: ['src/assets/img/**']
+        files: [PUBLIC_HTML + '/assets/img/**']
       }
     },
       
     express: {
       all: {
         options: {
-          livereload: true,
-          port: 3103,
-          bases: ['src'],
-          open: 'http://localhost:3103'
+          livereload: OPEN,
+          port: PORT,
+          bases: [PUBLIC_HTML],
+          open: URL
         }
       }
     },
@@ -55,7 +68,7 @@ module.exports = function(grunt){
           expand: true,
           cwd: 'src/sass/',
           src: 'main.scss',
-          dest: 'src/assets/css/',
+          dest: PUBLIC_HTML + '/assets/css/',
           ext: '.css'
         }]
       }
@@ -102,7 +115,7 @@ module.exports = function(grunt){
         },
         target: {
             files: {
-              'src/assets/css/main.css': ['src/assets/css/main.css']
+              'public/assets/css/main.css': [PUBLIC_HTML + '/assets/css/main.css']
             }
         }
     },
@@ -110,29 +123,29 @@ module.exports = function(grunt){
     
     //Copy and clean
     clean: {
-      build: 'dist',
-      unused: ['dist/*.jade', 'dist/tpl', 'dist/sass', 'dist/js'], 
-      jade: 'src/assets/tpl', 
+      build: DIST,
+      unused: [DIST + '/*.jade', DIST + '/tpl', DIST + '/sass', DIST + '/js'], 
+      jade: [PUBLIC_HTML + '/assets/tpl', PUBLIC_HTML + '/*.html' ], 
     },
       
     copy: {
       all: {
         files: [
-          {expand: true, cwd: 'src/', src: ['**'],  dest: 'dist/'},
+          {expand: true, cwd: PUBLIC_HTML + '/', src: ['**'],  dest: DIST + '/'},
         ],
       }
     },
     
     //JsHint
     jshint: {
-      all: ['gruntfile.js', 'src/js/**/*.js']
+      all: ['gruntfile.js', PUBLIC_HTML + '/js/**/*.js']
     }
 
   });
 
   //Load taks
   var tasks;
-  if(isDev){
+  if(env === 'dev'){
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -147,7 +160,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  var task_compile = ['clean:jade', 'sass', 'jade:'+env, 'uglify:'+env].concat(tasks);
+  var task_compile = ['clean:jade', 'sass', 'jade:' + env, 'uglify:' + env].concat(tasks);
   
   
   grunt.registerTask('build', ['clean:build', 'compile', 'copy:all', 'clean:unused']);
