@@ -3,6 +3,7 @@ Features:
 - Added environment: Use `--env=dev` for active the mode development environment.  
 - Added port: Use `--port=dev` for active the mode development environment.  
 - Relocated assets in public path.
+- Updated bower ver 1.7.9.  
 
 ##0.1.1 (February, 23 2016)
 Features:
