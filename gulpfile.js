@@ -63,7 +63,7 @@ gulp.task('jade', function(){
 
 gulp.task('watch', function(){
   livereload.listen();
-  express.run(['server.js']);
+  express.run(['server.js'], {}, false);
   gulp.watch('src/js/**/*.js', ['js']);
   gulp.watch('src/sass/**/*.scss', ['sass']);
   gulp.watch(['src/*.jade', 'src/**/*.jade'], ['jade']);
